@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import com.example.amazingAppsTestTask.R
 import com.example.amazingAppsTestTask.viewmodels.CharacterDetatilsViewModel
 
-class CharacterDetatilsFragment : Fragment() {
+class CharacterDetailsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = CharacterDetatilsFragment()
+        fun newInstance() = CharacterDetailsFragment()
     }
 
     private lateinit var viewModel: CharacterDetatilsViewModel
@@ -21,7 +21,7 @@ class CharacterDetatilsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.character_detatils_fragment, container, false)
+        return inflater.inflate(R.layout.character_details_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

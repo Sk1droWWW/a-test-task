@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AmazingAppsTestTask</string>
+    <string name="bottom_nav_search_label">Search</string>
+    <string name="bottom_nav_favorite_label">Favorite</string>
 </resources>
