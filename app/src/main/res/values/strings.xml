@@ -2,4 +2,15 @@
     <string name="app_name">AmazingAppsTestTask</string>
     <string name="bottom_nav_search_label">Search</string>
     <string name="bottom_nav_favorite_label">Favorite</string>
+    <string name="character_height_label">Height:</string>
+    <string name="character_mass_label">Mass:</string>
+    <string name="remove_btn_label">Remove</string>
+    <string name="add_btn_label">Add</string>
+    <string name="character_gender_label">Gender:</string>
+    <string name="character_birth_year_label">Birth Year:</string>
+    <string name="character_hair_color_label">Hair Color:</string>
+    <string name="character_skin_color_label">Skin Color:</string>
+    <string name="character_films_label">Films</string>
+    <string name="director_label">Director:</string>
+    <string name="release_date_label">Release</string>
 </resources>
