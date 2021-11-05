@@ -1,36 +1,39 @@
 package com.example.amazingAppsTestTask.viewmodels
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.amazingAppsTestTask.model.database.Character
 import com.example.amazingAppsTestTask.model.database.CharacterDao
 import kotlinx.coroutines.launch
 
-class FavoriteCharactersViewModel(
+class CharacterDetailsViewModel(
     private val characterDao: CharacterDao
 ) : ViewModel() {
+    val films: LiveData<List<Character>> = characterDao.getAll()
 
-    val characters: LiveData<List<Character>> = characterDao.getAll()
-
+    fun retrieveCharacter(id: Int): LiveData<Character> {
+        return characterDao.get(id)
+    }
 
     fun deleteCharacter(character: Character) {
         viewModelScope.launch {
             characterDao.delete(character)
         }
     }
-
-
 }
 
 /**
  * Factory class to instantiate the [ViewModel] instance.
  */
-class FavoriteCharactersViewModelFactory(
+class CharacterDetailsViewModelFactory(
     private val characterDao: CharacterDao
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FavoriteCharactersViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(CharacterDetailsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return FavoriteCharactersViewModel(characterDao) as T
+            return CharacterDetailsViewModel(characterDao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
