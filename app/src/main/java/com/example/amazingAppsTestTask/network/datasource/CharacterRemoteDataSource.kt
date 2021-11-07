@@ -1,9 +1,10 @@
-package com.example.amazingAppsTestTask.model.datasource
+package com.example.amazingAppsTestTask.network.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.amazingAppsTestTask.model.network.StarWarsApiService
-import com.example.amazingAppsTestTask.model.network.model.Character
+import com.example.amazingAppsTestTask.domain.mapToCharacterList
+import com.example.amazingAppsTestTask.domain.model.Character
+import com.example.amazingAppsTestTask.network.StarWarsApiService
 
 private const val INITIAL_PAGE = 1
 
@@ -17,7 +18,7 @@ class CharacterRemoteDataSource(
             val currentLoadingPageKey = params.key ?: INITIAL_PAGE
             val response = apiService.searchCharacter(currentLoadingPageKey, query)
             val responseData = mutableListOf<Character>()
-            val data = response.body()?.results ?: emptyList()
+            val data = response.body()?.results?.mapToCharacterList() ?: emptyList()
             responseData.addAll(data)
 
             val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1

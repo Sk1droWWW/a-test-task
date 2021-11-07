@@ -1,8 +1,8 @@
-package com.example.amazingAppsTestTask.model.network.model
+package com.example.amazingAppsTestTask.network.dto
 
 import com.squareup.moshi.Json
 
-open class SWModel {
+open class NetworkModel {
 
     @Json(name = "name")
     var name: String = ""
@@ -27,6 +27,6 @@ open class SWModel {
             return string[string.size - 1]
         }
 
-    open val relatedFilms: List<String>?
-        get() = null
+//    open val relatedFilms: List<Net>?
+//        get() = null
 }

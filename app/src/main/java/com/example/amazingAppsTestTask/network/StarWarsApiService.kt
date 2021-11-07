@@ -1,8 +1,8 @@
-package com.example.amazingAppsTestTask.model.network
+package com.example.amazingAppsTestTask.network
 
-import com.example.amazingAppsTestTask.model.network.model.Character
-import com.example.amazingAppsTestTask.model.network.model.Film
-import com.example.amazingAppsTestTask.model.network.model.SWModelList
+import com.example.amazingAppsTestTask.network.dto.NetworkCharacter
+import com.example.amazingAppsTestTask.network.dto.NetworkFilm
+import com.example.amazingAppsTestTask.network.dto.NetworkModelList
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Response
@@ -19,13 +19,13 @@ interface StarWarsApiService {
     @GET("people")
     suspend fun searchCharacter(
         @Query("page") page: Int,
-        @Query("search") name: String?): Response<SWModelList<Character>>
+        @Query("search") name: String?): Response<NetworkModelList<NetworkCharacter>>
 
     @GET("people" + "/{id}")
-    fun getCharacter(@Path("id") id: Int): Response<Character>
+    fun getCharacter(@Path("id") id: Int): Response<NetworkCharacter>
 
     @GET("films" + "/{id}")
-    fun getFilm(@Path("id") id: Int): Response<Film>
+    fun getFilm(@Path("id") id: Int): Response<NetworkFilm>
 
     companion object {
         private val moshi = Moshi.Builder()

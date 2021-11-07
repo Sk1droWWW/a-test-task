@@ -1,8 +1,8 @@
-package com.example.amazingAppsTestTask.model.network.model
+package com.example.amazingAppsTestTask.network.dto
 
 import com.squareup.moshi.Json
 
-data class SWModelList<T> (
+data class NetworkModelList<T> (
     @Json(name = "next")
     val next: String? = null,
 

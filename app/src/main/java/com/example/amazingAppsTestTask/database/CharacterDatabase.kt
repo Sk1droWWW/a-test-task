@@ -1,9 +1,10 @@
-package com.example.amazingAppsTestTask.model.database
+package com.example.amazingAppsTestTask.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.amazingAppsTestTask.database.dto.DBCharacter
 
 
 /**
@@ -11,7 +12,7 @@ import androidx.room.RoomDatabase
  */
 @Database(
     entities = [
-        Character::class
+        DBCharacter::class
     ],
     version = 1,
     exportSchema = false

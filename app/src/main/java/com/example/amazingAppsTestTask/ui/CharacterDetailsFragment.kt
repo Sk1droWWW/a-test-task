@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amazingAppsTestTask.CharacterApplication
 import com.example.amazingAppsTestTask.R
+import com.example.amazingAppsTestTask.database.dto.DBCharacter
 import com.example.amazingAppsTestTask.databinding.FragmentCharacterDetailsBinding
-import com.example.amazingAppsTestTask.model.database.Character
 import com.example.amazingAppsTestTask.viewmodels.CharacterDetailsViewModel
 import com.example.amazingAppsTestTask.viewmodels.CharacterDetailsViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -65,7 +64,7 @@ class CharacterDetailsFragment : Fragment() {
         }
     }
 
-    private fun bind(item: Character) {
+    private fun bind(item: DBCharacter) {
         binding.apply {
             characterNameTv.setText(item.name, TextView.BufferType.SPANNABLE)
             characterHeightTv.setText(item.height, TextView.BufferType.SPANNABLE)

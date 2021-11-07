@@ -1,20 +1,23 @@
 package com.example.amazingAppsTestTask.viewmodels
 
-import androidx.lifecycle.*
-import com.example.amazingAppsTestTask.model.database.Character
-import com.example.amazingAppsTestTask.model.database.CharacterDao
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.example.amazingAppsTestTask.database.CharacterDao
+import com.example.amazingAppsTestTask.database.dto.DBCharacter
 import kotlinx.coroutines.launch
 
 class FavoriteCharactersViewModel(
     private val characterDao: CharacterDao
 ) : ViewModel() {
 
-    val characters: LiveData<List<Character>> = characterDao.getAll()
+    val characters: LiveData<List<DBCharacter>> = characterDao.getAll()
 
 
-    fun deleteCharacter(character: Character) {
+    fun deleteCharacter(DBCharacter: DBCharacter) {
         viewModelScope.launch {
-            characterDao.delete(character)
+            characterDao.delete(DBCharacter)
         }
     }
 

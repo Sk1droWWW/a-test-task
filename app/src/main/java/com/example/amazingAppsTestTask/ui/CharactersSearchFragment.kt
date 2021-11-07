@@ -10,8 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amazingAppsTestTask.databinding.FragmentCharacterSearchBinding
-import com.example.amazingAppsTestTask.model.network.StarWarsApiService
-import com.example.amazingAppsTestTask.model.repository.StarWarsRepository
+import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
+import com.example.amazingAppsTestTask.network.StarWarsApiService
 import com.example.amazingAppsTestTask.viewmodels.CharacterSearchViewModel
 import com.example.amazingAppsTestTask.viewmodels.CharacterSearchViewModelFactory
 import kotlinx.coroutines.Job
@@ -54,7 +54,7 @@ class CharactersSearchFragment : Fragment() {
     private fun setupRecycler() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        val adapter = CharacterListAdapter {
+        val adapter = SearchCharactersPagingDataAdapter {
 //            viewModel.saveCharacter(it)
             /*val action =
                 CharactersSearchFragmentDirections
@@ -70,7 +70,7 @@ class CharactersSearchFragment : Fragment() {
         submitItems(adapter)
     }
 
-    private fun setupSearchView(adapter: CharacterListAdapter) {
+    private fun setupSearchView(adapter: SearchCharactersPagingDataAdapter) {
         binding.searchView
             .setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
@@ -85,7 +85,7 @@ class CharactersSearchFragment : Fragment() {
             })
     }
 
-    private fun search(query: String, adapter: CharacterListAdapter) {
+    private fun search(query: String, adapter: SearchCharactersPagingDataAdapter) {
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
             viewModel.searchCharacters(query)
@@ -94,7 +94,7 @@ class CharactersSearchFragment : Fragment() {
         submitItems(adapter)
     }
 
-    private fun submitItems(adapter: CharacterListAdapter) {
+    private fun submitItems(adapter: SearchCharactersPagingDataAdapter) {
         lifecycleScope.launch {
             viewModel.listData?.collect {
                 adapter.submitData(it)

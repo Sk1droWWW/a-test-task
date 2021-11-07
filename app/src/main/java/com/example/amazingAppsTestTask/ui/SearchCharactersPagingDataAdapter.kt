@@ -6,10 +6,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.amazingAppsTestTask.databinding.CharacterItemBinding
-import com.example.amazingAppsTestTask.model.network.model.Character
+import com.example.amazingAppsTestTask.network.dto.NetworkCharacter
 
-class CharacterListAdapter(private val onItemClicked: (Character) -> Unit) :
-    PagingDataAdapter<Character, CharacterListAdapter.ItemViewHolder>(DiffCallback) {
+class SearchCharactersPagingDataAdapter(private val onItemClicked: (NetworkCharacter) -> Unit) :
+    PagingDataAdapter<NetworkCharacter, SearchCharactersPagingDataAdapter.ItemViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -37,25 +37,25 @@ class CharacterListAdapter(private val onItemClicked: (Character) -> Unit) :
     inner class ItemViewHolder(private var binding: CharacterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(character: Character) {
-            binding.characterNameTv.text = character.name
-            binding.heightTv.text = character.height
-            binding.massTv.text = character.mass
+        fun bind(networkCharacter: NetworkCharacter) {
+            binding.characterNameTv.text = networkCharacter.name
+            binding.heightTv.text = networkCharacter.height
+            binding.massTv.text = networkCharacter.mass
             binding.favoriteBtn.setOnClickListener {
-                onItemClicked(character)
+                onItemClicked(networkCharacter)
 //                binding.favoriteBtn.background = R.drawable.ic_baseline_favorite_24
             }
         }
     }
 
     companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<Character>() {
-            override fun areItemsTheSame(oldCharacter: Character, newCharacter: Character): Boolean {
-                return oldCharacter === newCharacter
+        private val DiffCallback = object : DiffUtil.ItemCallback<NetworkCharacter>() {
+            override fun areItemsTheSame(oldNetworkCharacter: NetworkCharacter, newNetworkCharacter: NetworkCharacter): Boolean {
+                return oldNetworkCharacter === newNetworkCharacter
             }
 
-            override fun areContentsTheSame(oldCharacter: Character, newCharacter: Character): Boolean {
-                return oldCharacter == newCharacter
+            override fun areContentsTheSame(oldNetworkCharacter: NetworkCharacter, newNetworkCharacter: NetworkCharacter): Boolean {
+                return oldNetworkCharacter == newNetworkCharacter
             }
         }
     }

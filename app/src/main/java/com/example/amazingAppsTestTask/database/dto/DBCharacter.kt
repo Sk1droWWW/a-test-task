@@ -1,11 +1,11 @@
-package com.example.amazingAppsTestTask.model.database
+package com.example.amazingAppsTestTask.database.dto
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "character_table")
-data class Character(
+data class DBCharacter(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0,
