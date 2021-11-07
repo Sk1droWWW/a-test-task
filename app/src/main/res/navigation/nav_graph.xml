@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/charactersSearchFragment"
-        android:name="com.example.amazingAppsTestTask.ui.CharactersSearchFragment"
+        android:name="com.example.amazingAppsTestTask.ui.search.CharactersSearchFragment"
         android:label="fragment_character_search"
         tools:layout="@layout/fragment_character_search" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/favoriteCharactersFragment"
-        android:name="com.example.amazingAppsTestTask.ui.FavoriteCharactersFragment"
+        android:name="com.example.amazingAppsTestTask.ui.favorites.FavoriteCharactersFragment"
         android:label="fragment_favorite_characters"
         tools:layout="@layout/fragment_favorite_characters" >
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/characterDetailsFragment"
-        android:name="com.example.amazingAppsTestTask.ui.CharacterDetailsFragment"
+        android:name="com.example.amazingAppsTestTask.ui.details.CharacterDetailsFragment"
         android:label="character_details_fragment"
         tools:layout="@layout/fragment_character_details">
 

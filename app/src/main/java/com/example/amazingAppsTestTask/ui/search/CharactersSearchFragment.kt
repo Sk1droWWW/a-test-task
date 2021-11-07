@@ -1,4 +1,4 @@
-package com.example.amazingAppsTestTask.ui
+package com.example.amazingAppsTestTask.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -56,19 +56,19 @@ class CharactersSearchFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        val adapter = SearchCharactersPagingDataAdapter {
-//            viewModel.saveCharacter(it)
-            /*val action =
+        val adapter = SearchCharactersPagingDataAdapter(
+            { /*val action =
                 CharactersSearchFragmentDirections
                     .actionCharactersSearchFragmentToCharacterDetailsFragment(
                         characterId = it.id.toInt()
                     )
-            this.findNavController().navigate(action)*/
-        }
+                this.findNavController().navigate(action)*/ },
+            { viewModel.saveCharacter(it)}
+        )
 
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
         setupSearchView(adapter)
         submitItems(adapter)
@@ -106,4 +106,7 @@ class CharactersSearchFragment : Fragment() {
         }
     }
 
+    private fun navigateToDetailsFragment() {
+
+    }
 }

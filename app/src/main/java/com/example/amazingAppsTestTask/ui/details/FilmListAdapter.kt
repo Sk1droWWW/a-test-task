@@ -1,4 +1,4 @@
-package com.example.amazingAppsTestTask.ui
+package com.example.amazingAppsTestTask.ui.details
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

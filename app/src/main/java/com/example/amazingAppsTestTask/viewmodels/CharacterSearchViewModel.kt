@@ -25,9 +25,9 @@ class CharacterSearchViewModel(
         searchCharacters("")
     }
 
-    fun saveCharacter(networkCharacter: Character) {
+    fun saveCharacter(character: Character) {
         viewModelScope.launch {
-//            characterDao.insert(networkCharacter)
+            repository.saveCharacter(character)
         }
     }
 

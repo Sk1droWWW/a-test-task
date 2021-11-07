@@ -1,4 +1,4 @@
-package com.example.amazingAppsTestTask.ui
+package com.example.amazingAppsTestTask.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amazingAppsTestTask.CharacterApplication
 import com.example.amazingAppsTestTask.databinding.FragmentFavoriteCharactersBinding
+import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
+import com.example.amazingAppsTestTask.network.StarWarsApiService
+import com.example.amazingAppsTestTask.ui.search.CharactersSearchFragment
 import com.example.amazingAppsTestTask.viewmodels.FavoriteCharactersViewModel
 import com.example.amazingAppsTestTask.viewmodels.FavoriteCharactersViewModelFactory
 
@@ -19,8 +22,10 @@ class FavoriteCharactersFragment : Fragment() {
 
     private val viewModel: FavoriteCharactersViewModel by activityViewModels {
         FavoriteCharactersViewModelFactory(
-            (activity?.application as CharacterApplication).database
-                .itemDao()
+            StarWarsRepository(
+                StarWarsApiService.getApiService(),
+                (activity?.application as CharacterApplication).database
+                    .itemDao()),
         )
     }
 
@@ -49,24 +54,27 @@ class FavoriteCharactersFragment : Fragment() {
     private fun setRecycler() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        val adapter = SearchCharactersPagingDataAdapter {
-         /*   val action =
-                FavoriteCharactersFragmentDirections
-                    .actionFavoriteCharactersFragmentToCharacterDetailsFragment(
-                        characterId = it.id.toInt()
-                    )
-            this.findNavController().navigate(action)*/
-        }
+        val adapter = FavoriteCharactersListAdapter(
+            {
+                /*   val action =
+                       FavoriteCharactersFragmentDirections
+                           .actionFavoriteCharactersFragmentToCharacterDetailsFragment(
+                               characterId = it.id.toInt()
+                           )
+                   this.findNavController().navigate(action)*/
+            },
+            { viewModel.deleteCharacter(it) }
+        )
 
         binding.recyclerView.adapter = adapter
 
         observeItems(adapter)
     }
 
-    private fun observeItems(adapter: SearchCharactersPagingDataAdapter) {
-//        viewModel.characters.observe(viewLifecycleOwner) { items ->
-//            adapter.submitList(items)
-//        }
+    private fun observeItems(adapter: FavoriteCharactersListAdapter) {
+        viewModel.characters.observe(viewLifecycleOwner) { items ->
+            adapter.submitList(items)
+        }
     }
 
 }

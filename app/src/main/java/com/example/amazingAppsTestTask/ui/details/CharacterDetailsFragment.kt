@@ -1,4 +1,4 @@
-package com.example.amazingAppsTestTask.ui
+package com.example.amazingAppsTestTask.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amazingAppsTestTask.CharacterApplication
 import com.example.amazingAppsTestTask.R
-import com.example.amazingAppsTestTask.database.dto.DBCharacter
 import com.example.amazingAppsTestTask.databinding.FragmentCharacterDetailsBinding
+import com.example.amazingAppsTestTask.domain.model.Character
+import com.example.amazingAppsTestTask.ui.search.CharactersSearchFragment
 import com.example.amazingAppsTestTask.viewmodels.CharacterDetailsViewModel
 import com.example.amazingAppsTestTask.viewmodels.CharacterDetailsViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -56,15 +57,15 @@ class CharacterDetailsFragment : Fragment() {
     }
 
     private fun setCharacterInfo() {
-        val id = navigationArgs.characterId
-        if (id > 0) {
-            viewModel.retrieveCharacter(id).observe(this.viewLifecycleOwner) { selectedItem ->
-                bind(selectedItem)
-            }
-        }
+//        val id = navigationArgs.characterId
+//        if (id > 0) {
+//            viewModel.retrieveCharacter(id).observe(this.viewLifecycleOwner) { selectedItem ->
+////                bind(selectedItem)
+//            }
+//        }
     }
 
-    private fun bind(item: DBCharacter) {
+    private fun bind(item: Character) {
         binding.apply {
             characterNameTv.setText(item.name, TextView.BufferType.SPANNABLE)
             characterHeightTv.setText(item.height, TextView.BufferType.SPANNABLE)

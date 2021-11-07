@@ -1,15 +1,19 @@
-package com.example.amazingAppsTestTask.ui
+package com.example.amazingAppsTestTask.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.amazingAppsTestTask.R
 import com.example.amazingAppsTestTask.databinding.CharacterItemBinding
-import com.example.amazingAppsTestTask.network.dto.NetworkCharacter
+import com.example.amazingAppsTestTask.domain.model.Character
 
-class FavoriteCharactersListAdapter(private val onItemClicked: (NetworkCharacter) -> Unit) :
-    ListAdapter<NetworkCharacter, FavoriteCharactersListAdapter.ItemViewHolder>(DiffCallback) {
+class FavoriteCharactersListAdapter(
+    private val onItemClicked: (Character) -> Unit,
+    private val onDeleteClicked: (Character) -> Unit
+) :
+    ListAdapter<Character, FavoriteCharactersListAdapter.ItemViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -37,25 +41,33 @@ class FavoriteCharactersListAdapter(private val onItemClicked: (NetworkCharacter
 
     inner class ItemViewHolder(private var binding: CharacterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(networkCharacter: NetworkCharacter) {
-            binding.characterNameTv.text = networkCharacter.name
-            binding.heightTv.text = networkCharacter.height
-            binding.massTv.text = networkCharacter.mass
+        fun bind(character: Character) {
+            binding.characterNameTv.text = character.name
+            binding.heightTv.text = character.height
+            binding.massTv.text = character.mass
+
+            binding.favoriteBtn.setBackgroundResource(R.drawable.ic_baseline_delete_24)
             binding.favoriteBtn.setOnClickListener {
-                onItemClicked(networkCharacter)
+                onDeleteClicked(character)
 //                binding.favoriteBtn.background = R.drawable.ic_baseline_favorite_24
             }
         }
     }
 
     companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<NetworkCharacter>() {
-            override fun areItemsTheSame(oldNetworkCharacter: NetworkCharacter, newNetworkCharacter: NetworkCharacter): Boolean {
-                return oldNetworkCharacter === newNetworkCharacter
+        private val DiffCallback = object : DiffUtil.ItemCallback<Character>() {
+            override fun areItemsTheSame(
+                oldCharacter: Character,
+                newCharacter: Character
+            ): Boolean {
+                return oldCharacter === newCharacter
             }
 
-            override fun areContentsTheSame(oldNetworkCharacter: NetworkCharacter, newNetworkCharacter: NetworkCharacter): Boolean {
-                return oldNetworkCharacter == newNetworkCharacter
+            override fun areContentsTheSame(
+                oldCharacter: Character,
+                newCharacter: Character
+            ): Boolean {
+                return oldCharacter == newCharacter
             }
         }
     }

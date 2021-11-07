@@ -1,14 +1,17 @@
-package com.example.amazingAppsTestTask.ui
+package com.example.amazingAppsTestTask.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.amazingAppsTestTask.R
 import com.example.amazingAppsTestTask.databinding.CharacterItemBinding
 import com.example.amazingAppsTestTask.domain.model.Character
 
-class SearchCharactersPagingDataAdapter(private val onItemClicked: (Character) -> Unit) :
+class SearchCharactersPagingDataAdapter(
+    private val onItemClicked: (Character) -> Unit,
+    private val onFavoriteClicked: (Character) -> Unit) :
     PagingDataAdapter<Character, SearchCharactersPagingDataAdapter.ItemViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -42,8 +45,8 @@ class SearchCharactersPagingDataAdapter(private val onItemClicked: (Character) -
             binding.heightTv.text = character.height
             binding.massTv.text = character.mass
             binding.favoriteBtn.setOnClickListener {
-                onItemClicked(character)
-//                binding.favoriteBtn.background = R.drawable.ic_baseline_favorite_24
+                onFavoriteClicked(character)
+                binding.favoriteBtn.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
             }
         }
     }

@@ -1,25 +1,25 @@
 package com.example.amazingAppsTestTask.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.amazingAppsTestTask.database.dto.DBCharacter
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CharacterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(DBCharacter: DBCharacter)
+    suspend fun insert(character: DBCharacter)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(DBCharacter: DBCharacter)
+    suspend fun update(character: DBCharacter)
 
     @Delete
-    suspend fun delete(DBCharacter: DBCharacter)
+    suspend fun delete(character: DBCharacter)
 
-    @Query("SELECT * FROM character_table WHERE id = :key")
-    fun get(key: Int): LiveData<DBCharacter>
+    @Query("SELECT * FROM character_table WHERE id = :id")
+    fun get(id: Int): Flow<DBCharacter>
 
     @Query("SELECT * FROM character_table")
-    fun getAll(): LiveData<List<DBCharacter>>
+    fun getFavorites(): Flow<List<DBCharacter>>
 
     @Query("SELECT EXISTS(SELECT * FROM character_table WHERE id = :id)")
     fun isCharacterExist(id : Int) : Boolean

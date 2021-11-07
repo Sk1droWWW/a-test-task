@@ -1,26 +1,21 @@
 package com.example.amazingAppsTestTask.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.example.amazingAppsTestTask.database.CharacterDao
 import com.example.amazingAppsTestTask.database.dto.DBCharacter
-import kotlinx.coroutines.launch
 
 class CharacterDetailsViewModel(
     private val characterDao: CharacterDao
 ) : ViewModel() {
-    val films: LiveData<List<DBCharacter>> = characterDao.getAll()
+//    val films: LiveData<List<DBCharacter>> = characterDao.getFavorites().asLiveData()
 
-    fun retrieveCharacter(id: Int): LiveData<DBCharacter> {
-        return characterDao.get(id)
-    }
 
-    fun deleteCharacter(DBCharacter: DBCharacter) {
-        viewModelScope.launch {
+
+    fun deleteCharacter(character: DBCharacter) {
+        /*viewModelScope.launch {
             characterDao.delete(DBCharacter)
-        }
+        }*/
     }
 }
 
