@@ -12,6 +12,6 @@ data class SWModelList<T> (
     @Json(name = "count")
     val count: Int = 0,
 
-    @Json(name ="results")
+    @Json(name = "results")
     val results: List<T>? = null
 )

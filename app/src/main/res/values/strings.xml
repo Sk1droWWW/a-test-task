@@ -13,4 +13,5 @@
     <string name="character_films_label">Films</string>
     <string name="director_label">Director:</string>
     <string name="release_date_label">Release</string>
+    <string name="search_character_hint">Search Character</string>
 </resources>

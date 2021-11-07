@@ -18,7 +18,7 @@ open class SWModel {
      * @return id String
      */
     // example: https://swapi.co/api/films/2/
-    @Json(name = "id")
+//    @Json(name = "id")
     val id: String
         get() {
             val string = url.split("/".toRegex()).dropLastWhile {

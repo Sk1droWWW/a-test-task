@@ -2,15 +2,14 @@ package com.example.amazingAppsTestTask.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.amazingAppsTestTask.R
 import com.example.amazingAppsTestTask.databinding.CharacterItemBinding
-import com.example.amazingAppsTestTask.model.database.Character
+import com.example.amazingAppsTestTask.model.network.model.Character
 
 class CharacterListAdapter(private val onItemClicked: (Character) -> Unit) :
-    ListAdapter<Character, CharacterListAdapter.ItemViewHolder>(DiffCallback) {
+    PagingDataAdapter<Character, CharacterListAdapter.ItemViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -32,7 +31,7 @@ class CharacterListAdapter(private val onItemClicked: (Character) -> Unit) :
 //        holder.itemView.setOnClickListener {
 //            onItemClicked(current)
 //        }
-        holder.bind(current)
+        current?.let { holder.bind(it) }
     }
 
     inner class ItemViewHolder(private var binding: CharacterItemBinding) :
@@ -40,8 +39,8 @@ class CharacterListAdapter(private val onItemClicked: (Character) -> Unit) :
 
         fun bind(character: Character) {
             binding.characterNameTv.text = character.name
-            binding.filmsAmountTv.text = character.films.toString()
-            binding.birthYearTv.text = character.birthYear
+            binding.heightTv.text = character.height
+            binding.massTv.text = character.mass
             binding.favoriteBtn.setOnClickListener {
                 onItemClicked(character)
 //                binding.favoriteBtn.background = R.drawable.ic_baseline_favorite_24
@@ -56,7 +55,7 @@ class CharacterListAdapter(private val onItemClicked: (Character) -> Unit) :
             }
 
             override fun areContentsTheSame(oldCharacter: Character, newCharacter: Character): Boolean {
-                return oldCharacter.id == newCharacter.id
+                return oldCharacter == newCharacter
             }
         }
     }

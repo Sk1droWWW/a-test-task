@@ -73,7 +73,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/films_amount_tv"
+            android:id="@+id/height_tv"
 
             android:layout_marginStart="@dimen/extra_small_margin"
             android:ellipsize="end"
@@ -96,14 +96,14 @@
             android:text="@string/character_mass_label"
             android:textSize="12sp"
 
-            app:layout_constraintBottom_toBottomOf="@+id/films_amount_tv"
-            app:layout_constraintStart_toEndOf="@id/films_amount_tv"
-            app:layout_constraintTop_toTopOf="@+id/films_amount_tv" />
+            app:layout_constraintBottom_toBottomOf="@+id/height_tv"
+            app:layout_constraintStart_toEndOf="@id/height_tv"
+            app:layout_constraintTop_toTopOf="@+id/height_tv" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/birth_year_tv"
+            android:id="@+id/mass_tv"
 
             android:layout_marginStart="@dimen/extra_small_margin"
             android:ellipsize="end"

@@ -5,6 +5,8 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Character (
+    @Json(name = "name")        val name: String = "",
+    @Json(name = "url")         val url: String = "",
     @Json(name = "height")      val height: String,
     @Json(name = "mass")        val mass: String,
     @Json(name = "gender")      val gender: String,
@@ -12,5 +14,5 @@ data class Character (
     @Json(name = "hair_color")  val hairColor: String,
     @Json(name = "skin_color")  val skinColor: String,
     @Json(name = "eye_color")   val eyeColor: String,
-    @Json(name = "films")       override val relatedFilms: List<String>?
-) : SWModel()
+    @Json(name = "films")       val relatedFilms: List<String>?
+)
