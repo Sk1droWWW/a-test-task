@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.amazingAppsTestTask.CharacterApplication
 import com.example.amazingAppsTestTask.databinding.FragmentCharacterSearchBinding
 import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
 import com.example.amazingAppsTestTask.network.StarWarsApiService
@@ -24,7 +25,10 @@ class CharactersSearchFragment : Fragment() {
 
     private val viewModel: CharacterSearchViewModel by activityViewModels {
         CharacterSearchViewModelFactory(
-            StarWarsRepository(StarWarsApiService.getApiService())
+            StarWarsRepository(
+                StarWarsApiService.getApiService(),
+                (activity?.application as CharacterApplication).database
+                    .itemDao()),
         )
     }
     private var searchJob: Job? = null

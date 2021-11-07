@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.amazingAppsTestTask.domain.model.Character
 import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
-import com.example.amazingAppsTestTask.network.dto.NetworkCharacter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -19,13 +19,13 @@ class CharacterSearchViewModel(
     }
 
 //    private val _listData = MutableStateFlow<PagingData<DBCharacter>?>(null)
-    var listData: Flow<PagingData<NetworkCharacter>>? = null
+    var listData: Flow<PagingData<Character>>? = null
 
     init {
         searchCharacters("")
     }
 
-    fun saveCharacter(networkCharacter: NetworkCharacter) {
+    fun saveCharacter(networkCharacter: Character) {
         viewModelScope.launch {
 //            characterDao.insert(networkCharacter)
         }

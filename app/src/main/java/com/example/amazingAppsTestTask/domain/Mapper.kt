@@ -6,8 +6,8 @@ import com.example.amazingAppsTestTask.network.dto.NetworkCharacter
 import com.example.amazingAppsTestTask.network.dto.NetworkFilm
 
 
-fun NetworkCharacter.mapToCharacter() : Character {
-    return Character(
+fun NetworkCharacter.mapToCharacter() =
+    Character(
         id = this.id,
         name = this.name,
         height = this.height,
@@ -16,10 +16,10 @@ fun NetworkCharacter.mapToCharacter() : Character {
         skinColor = this.skinColor,
         eyeColor = this.eyeColor,
         birthYear = this.birthYear,
-        gender = this.gender,
-        films = this.relatedFilms?.mapToFilmList() ?: listOf()
+        gender = this.gender
+//        films = this.relatedFilms?.mapToFilmList() ?: listOf()
     )
-}
+
 
 fun List<NetworkCharacter>.mapToCharacterList() = this.map { it.mapToCharacter() }
 

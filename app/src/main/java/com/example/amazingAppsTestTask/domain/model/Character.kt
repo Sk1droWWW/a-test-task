@@ -10,6 +10,6 @@ data class Character(
     val eyeColor: String = "",
     val birthYear: String = "",
     val gender: String,
-    val films: List<Film>,
+//    val films: List<Film>,
 )
 
