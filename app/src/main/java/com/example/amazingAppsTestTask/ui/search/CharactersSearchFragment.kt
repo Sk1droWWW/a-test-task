@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amazingAppsTestTask.CharacterApplication
 import com.example.amazingAppsTestTask.databinding.FragmentCharacterSearchBinding
@@ -58,13 +59,13 @@ class CharactersSearchFragment : Fragment() {
     private fun setupRecycler() {
 
         val adapter = SearchCharactersPagingDataAdapter(
-            { /*val action =
+            { val action =
                 CharactersSearchFragmentDirections
                     .actionCharactersSearchFragmentToCharacterDetailsFragment(
-                        characterId = it.id.toInt()
+                        character = it
                     )
-                this.findNavController().navigate(action)*/ },
-            { viewModel.saveCharacter(it)}
+                this.findNavController().navigate(action) },
+            { viewModel.characterItemClick(it)}
         )
 
         binding.recyclerView.setHasFixedSize(true)
@@ -109,7 +110,4 @@ class CharactersSearchFragment : Fragment() {
         }
     }
 
-    private fun navigateToDetailsFragment() {
-
-    }
 }

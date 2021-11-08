@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.example.amazingAppsTestTask.database.CharacterDao
 import com.example.amazingAppsTestTask.domain.mapFromDBToCharacterList
+import com.example.amazingAppsTestTask.domain.mapToCharacter
 import com.example.amazingAppsTestTask.domain.mapToDBCharacter
 import com.example.amazingAppsTestTask.domain.model.Character
 import com.example.amazingAppsTestTask.network.StarWarsApiService
@@ -23,18 +24,18 @@ class StarWarsRepository(
         }
 
     fun searchCharacters(query: String) = Pager(
-        pagingSourceFactory = { CharacterRemoteDataSource(api, query) },
+        pagingSourceFactory = { CharacterRemoteDataSource(api, dao, query) },
         config = PagingConfig(
             pageSize = PAGE_SIZE
         )
     ).flow
 
-    suspend fun deleteCharacter(character: Character) {
-        dao.delete(character.mapToDBCharacter())
+    suspend fun deleteCharacter(character: Character?) {
+        character?.let { dao.delete(it.mapToDBCharacter()) }
     }
 
-    fun retrieveCharacter() {
-
+    fun retrieveCharacter(character: Character) : Flow<Character> {
+        return dao.get(character.id).map { it.mapToCharacter() }
     }
 
     suspend fun saveCharacter(character: Character) {

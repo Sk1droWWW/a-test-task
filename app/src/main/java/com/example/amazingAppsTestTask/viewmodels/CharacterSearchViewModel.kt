@@ -26,9 +26,25 @@ class CharacterSearchViewModel(
         searchCharacters("")
     }
 
-    fun saveCharacter(character: Character) {
+    private fun saveCharacter(character: Character) {
         viewModelScope.launch {
             repository.saveCharacter(character)
+        }
+    }
+
+    private fun deleteCharacter(character: Character) {
+        viewModelScope.launch {
+            repository.deleteCharacter(character)
+        }
+    }
+
+    fun characterItemClick(character: Character) {
+        if (character.favorite) {
+            character.favorite = false
+            deleteCharacter(character)
+        } else {
+            character.favorite = true
+            saveCharacter(character)
         }
     }
 
@@ -42,8 +58,6 @@ class CharacterSearchViewModel(
  */
 class CharacterSearchViewModelFactory(
     private val repository: StarWarsRepository
-//    private val characterDao: CharacterDao,
-//    private val apiService: StarWarsApiService
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CharacterSearchViewModel::class.java)) {

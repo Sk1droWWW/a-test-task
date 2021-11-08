@@ -2,23 +2,33 @@ package com.example.amazingAppsTestTask.network.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.amazingAppsTestTask.database.CharacterDao
 import com.example.amazingAppsTestTask.domain.mapFromNetworkToCharacterList
 import com.example.amazingAppsTestTask.domain.model.Character
 import com.example.amazingAppsTestTask.network.StarWarsApiService
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 private const val INITIAL_PAGE = 1
 
 class CharacterRemoteDataSource(
     private val apiService: StarWarsApiService,
+    private val dao: CharacterDao,
     private val query: String
 ) : PagingSource<Int, Character>() {
 
+    @DelicateCoroutinesApi
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         try {
             val currentLoadingPageKey = params.key ?: INITIAL_PAGE
             val response = apiService.searchCharacter(currentLoadingPageKey, query)
             val responseData = mutableListOf<Character>()
-            val data = response.body()?.results?.mapFromNetworkToCharacterList() ?: emptyList()
+            val dataResult = GlobalScope.async(start = CoroutineStart.LAZY) {
+                response.body()?.results?.mapFromNetworkToCharacterList(dao) ?: emptyList()
+            }
+            val data = dataResult.await()
             responseData.addAll(data)
 
             val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1

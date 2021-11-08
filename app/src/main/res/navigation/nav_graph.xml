@@ -35,14 +35,8 @@
         tools:layout="@layout/fragment_character_details">
 
         <argument
-            android:name="saved"
-            android:defaultValue="false"
-            app:argType="boolean" />
-
-        <argument
-            android:name="character_id"
-            android:defaultValue="-1"
-            app:argType="integer" />
+            android:name="character"
+            app:argType="com.example.amazingAppsTestTask.domain.model.Character"/>
 
     </fragment>
 

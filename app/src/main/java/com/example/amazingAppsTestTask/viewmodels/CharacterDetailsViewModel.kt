@@ -1,21 +1,36 @@
 package com.example.amazingAppsTestTask.viewmodels
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.example.amazingAppsTestTask.database.CharacterDao
-import com.example.amazingAppsTestTask.database.dto.DBCharacter
+import androidx.lifecycle.*
+import com.example.amazingAppsTestTask.domain.model.Character
+import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
+import kotlinx.coroutines.launch
 
 class CharacterDetailsViewModel(
-    private val characterDao: CharacterDao
+    private val repository: StarWarsRepository
 ) : ViewModel() {
-//    val films: LiveData<List<DBCharacter>> = characterDao.getFavorites().asLiveData()
 
+    private val _btnState = MutableLiveData<Boolean>()
+    val btnState: LiveData<Boolean>
+        get() = _btnState
 
+    fun saveCharacter(character: Character) {
+        viewModelScope.launch {
+            repository.saveCharacter(character)
+        }
 
-    fun deleteCharacter(character: DBCharacter) {
-        /*viewModelScope.launch {
-            characterDao.delete(DBCharacter)
-        }*/
+        setButtonsState(true)
+    }
+
+    fun deleteCharacter(character: Character) {
+        viewModelScope.launch {
+            repository.deleteCharacter(character)
+        }
+
+        setButtonsState(false)
+    }
+
+    fun setButtonsState(state: Boolean) {
+        _btnState.postValue(state)
     }
 }
 
@@ -23,12 +38,12 @@ class CharacterDetailsViewModel(
  * Factory class to instantiate the [ViewModel] instance.
  */
 class CharacterDetailsViewModelFactory(
-    private val characterDao: CharacterDao
+    private val repository: StarWarsRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CharacterDetailsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return CharacterDetailsViewModel(characterDao) as T
+            return CharacterDetailsViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

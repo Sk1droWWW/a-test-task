@@ -6,17 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amazingAppsTestTask.CharacterApplication
 import com.example.amazingAppsTestTask.databinding.FragmentFavoriteCharactersBinding
 import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
 import com.example.amazingAppsTestTask.network.StarWarsApiService
-import com.example.amazingAppsTestTask.ui.search.CharactersSearchFragment
 import com.example.amazingAppsTestTask.viewmodels.FavoriteCharactersViewModel
 import com.example.amazingAppsTestTask.viewmodels.FavoriteCharactersViewModelFactory
 
 class FavoriteCharactersFragment : Fragment() {
-
 
     private lateinit var binding: FragmentFavoriteCharactersBinding
 
@@ -27,10 +26,6 @@ class FavoriteCharactersFragment : Fragment() {
                 (activity?.application as CharacterApplication).database
                     .itemDao()),
         )
-    }
-
-    companion object {
-        fun newInstance() = CharactersSearchFragment()
     }
 
     override fun onCreateView(
@@ -52,20 +47,19 @@ class FavoriteCharactersFragment : Fragment() {
     }
 
     private fun setRecycler() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
-
         val adapter = FavoriteCharactersListAdapter(
             {
-                /*   val action =
-                       FavoriteCharactersFragmentDirections
-                           .actionFavoriteCharactersFragmentToCharacterDetailsFragment(
-                               characterId = it.id.toInt()
-                           )
-                   this.findNavController().navigate(action)*/
+                val action =
+                    FavoriteCharactersFragmentDirections
+                        .actionFavoriteCharactersFragmentToCharacterDetailsFragment(
+                            character = it
+                        )
+               this.findNavController().navigate(action)
             },
             { viewModel.deleteCharacter(it) }
         )
 
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.adapter = adapter
 
         observeItems(adapter)

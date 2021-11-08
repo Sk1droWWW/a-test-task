@@ -13,7 +13,8 @@ import com.example.amazingAppsTestTask.CharacterApplication
 import com.example.amazingAppsTestTask.R
 import com.example.amazingAppsTestTask.databinding.FragmentCharacterDetailsBinding
 import com.example.amazingAppsTestTask.domain.model.Character
-import com.example.amazingAppsTestTask.ui.search.CharactersSearchFragment
+import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
+import com.example.amazingAppsTestTask.network.StarWarsApiService
 import com.example.amazingAppsTestTask.viewmodels.CharacterDetailsViewModel
 import com.example.amazingAppsTestTask.viewmodels.CharacterDetailsViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,13 +27,11 @@ class CharacterDetailsFragment : Fragment() {
     private val navigationArgs: CharacterDetailsFragmentArgs by navArgs()
     private val viewModel: CharacterDetailsViewModel by activityViewModels {
         CharacterDetailsViewModelFactory(
-            (activity?.application as CharacterApplication).database
-                .itemDao()
+            StarWarsRepository(
+                StarWarsApiService.getApiService(),
+                (activity?.application as CharacterApplication).database
+                    .itemDao()),
         )
-    }
-
-    companion object {
-        fun newInstance() = CharactersSearchFragment()
     }
 
     override fun onCreateView(
@@ -57,12 +56,11 @@ class CharacterDetailsFragment : Fragment() {
     }
 
     private fun setCharacterInfo() {
-//        val id = navigationArgs.characterId
-//        if (id > 0) {
-//            viewModel.retrieveCharacter(id).observe(this.viewLifecycleOwner) { selectedItem ->
-////                bind(selectedItem)
-//            }
-//        }
+        val character = navigationArgs.character
+
+        viewModel.setButtonsState(character.favorite)
+        observeButtonsState()
+        bind(character)
     }
 
     private fun bind(item: Character) {
@@ -74,6 +72,21 @@ class CharacterDetailsFragment : Fragment() {
             characterGenderTv.setText(item.gender, TextView.BufferType.SPANNABLE)
             characterHairColorTv.setText(item.hairColor, TextView.BufferType.SPANNABLE)
             characterSkinColorTv.setText(item.skinColor, TextView.BufferType.SPANNABLE)
+
+            removeBtn.setOnClickListener {
+                item.favorite = false
+                viewModel.deleteCharacter(item)
+            }
+            addBtn.setOnClickListener {
+                item.favorite = true
+                viewModel.saveCharacter(item) }
+        }
+    }
+
+    private fun observeButtonsState() {
+        viewModel.btnState.observe(viewLifecycleOwner) { state ->
+            binding.addBtn.isEnabled = !state
+            binding.removeBtn.isEnabled = state
         }
     }
 
@@ -89,10 +102,9 @@ class CharacterDetailsFragment : Fragment() {
     }
 
     private fun setRecycler() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
-
         val adapter = FilmListAdapter()
 
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.adapter = adapter
 
         observeItems(adapter)

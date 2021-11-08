@@ -97,7 +97,7 @@
             android:text="@string/character_mass_label"
             android:textStyle="bold"
 
-            app:layout_constraintStart_toStartOf="@+id/remove"
+            app:layout_constraintStart_toStartOf="@+id/remove_btn"
             app:layout_constraintTop_toTopOf="@+id/character_height_label" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -235,7 +235,7 @@
             app:layoutManager="LinearLayoutManager"
 
 
-            app:layout_constraintBottom_toTopOf="@+id/add"
+            app:layout_constraintBottom_toTopOf="@+id/add_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/character_films_label"
@@ -243,7 +243,7 @@
             tools:listitem="@layout/film_item" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/add"
+            android:id="@+id/add_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
@@ -254,12 +254,12 @@
             app:iconGravity="textStart"
 
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/remove"
+            app:layout_constraintEnd_toStartOf="@+id/remove_btn"
             app:layout_constraintStart_toStartOf="@+id/character_name_tv"
             app:layout_constraintTop_toBottomOf="@id/recyclerView" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/remove"
+            android:id="@+id/remove_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
@@ -270,10 +270,10 @@
             app:icon="@drawable/ic_baseline_delete_24"
             app:iconGravity="textStart"
 
-            app:layout_constraintBottom_toBottomOf="@+id/add"
+            app:layout_constraintBottom_toBottomOf="@+id/add_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/add"
-            app:layout_constraintTop_toTopOf="@+id/add" />
+            app:layout_constraintStart_toEndOf="@id/add_btn"
+            app:layout_constraintTop_toTopOf="@+id/add_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

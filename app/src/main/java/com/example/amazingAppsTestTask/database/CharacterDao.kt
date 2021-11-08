@@ -16,11 +16,11 @@ interface CharacterDao {
     suspend fun delete(character: DBCharacter)
 
     @Query("SELECT * FROM character_table WHERE id = :id")
-    fun get(id: Int): Flow<DBCharacter>
+    fun get(id: String): Flow<DBCharacter>
 
     @Query("SELECT * FROM character_table")
     fun getFavorites(): Flow<List<DBCharacter>>
 
     @Query("SELECT EXISTS(SELECT * FROM character_table WHERE id = :id)")
-    fun isCharacterExist(id : Int) : Boolean
+    fun isCharacterExist(id : String) : Boolean
 }

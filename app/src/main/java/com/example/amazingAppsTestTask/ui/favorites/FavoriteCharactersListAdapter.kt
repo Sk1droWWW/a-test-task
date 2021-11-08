@@ -32,9 +32,9 @@ class FavoriteCharactersListAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val current = getItem(position)
 
-//        holder.itemView.setOnClickListener {
-//            onItemClicked(current)
-//        }
+        holder.itemView.setOnClickListener {
+            onItemClicked(current)
+        }
         holder.bind(current)
     }
 
@@ -49,7 +49,6 @@ class FavoriteCharactersListAdapter(
             binding.favoriteBtn.setImageResource(R.drawable.ic_baseline_delete_24)
             binding.favoriteBtn.setOnClickListener {
                 onDeleteClicked(character)
-//                binding.favoriteBtn.background = R.drawable.ic_baseline_favorite_24
             }
         }
     }
@@ -67,7 +66,7 @@ class FavoriteCharactersListAdapter(
                 oldCharacter: Character,
                 newCharacter: Character
             ): Boolean {
-                return oldCharacter == newCharacter
+                return oldCharacter.id == newCharacter.id
             }
         }
     }

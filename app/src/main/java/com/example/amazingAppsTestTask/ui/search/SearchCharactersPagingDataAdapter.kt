@@ -31,10 +31,12 @@ class SearchCharactersPagingDataAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val current = getItem(position)
 
-//        holder.itemView.setOnClickListener {
-//            onItemClicked(current)
-//        }
-        current?.let { holder.bind(it) }
+        holder.itemView.setOnClickListener {
+            current?.let { onItemClicked(it) }
+        }
+        current?.let {
+            holder.bind(it)
+        }
     }
 
     inner class ItemViewHolder(private var binding: CharacterItemBinding) :
@@ -44,9 +46,21 @@ class SearchCharactersPagingDataAdapter(
             binding.characterNameTv.text = character.name
             binding.heightTv.text = character.height
             binding.massTv.text = character.mass
+            setFavoriteBackground(character)
+
             binding.favoriteBtn.setOnClickListener {
                 onFavoriteClicked(character)
-                binding.favoriteBtn.setImageResource(R.drawable.ic_baseline_favorite_24)
+                setFavoriteBackground(character)
+            }
+        }
+
+        private fun setFavoriteBackground(character: Character) {
+            if (character.favorite) {
+                binding.favoriteBtn
+                    .setImageResource(R.drawable.ic_baseline_favorite_24)
+            } else {
+                binding.favoriteBtn
+                    .setImageResource(R.drawable.ic_baseline_favorite_border_24)
             }
         }
     }
@@ -57,14 +71,14 @@ class SearchCharactersPagingDataAdapter(
                 oldCharacter: Character,
                 newCharacter: Character
             ): Boolean {
-                return oldCharacter === newCharacter
+                return oldCharacter.id == newCharacter.id
             }
 
             override fun areContentsTheSame(
                 oldCharacter: Character,
                 newCharacter: Character
             ): Boolean {
-                return oldCharacter == newCharacter
+                return oldCharacter.id == newCharacter.id
             }
         }
     }

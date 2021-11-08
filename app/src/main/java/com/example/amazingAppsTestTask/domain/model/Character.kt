@@ -1,5 +1,7 @@
 package com.example.amazingAppsTestTask.domain.model
 
+import java.io.Serializable
+
 data class Character(
     val id: String = "",
     val name: String,
@@ -10,6 +12,7 @@ data class Character(
     val eyeColor: String = "",
     val birthYear: String = "",
     val gender: String,
+    var favorite: Boolean = false
 //    val films: List<Film>,
-)
+) : Serializable
 

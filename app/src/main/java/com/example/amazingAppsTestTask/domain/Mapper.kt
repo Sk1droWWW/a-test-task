@@ -1,5 +1,6 @@
 package com.example.amazingAppsTestTask.domain
 
+import com.example.amazingAppsTestTask.database.CharacterDao
 import com.example.amazingAppsTestTask.database.dto.DBCharacter
 import com.example.amazingAppsTestTask.domain.model.Character
 import com.example.amazingAppsTestTask.domain.model.Film
@@ -30,7 +31,8 @@ fun DBCharacter.mapToCharacter() =
         skinColor = this.skinColor,
         eyeColor = this.eyeColor,
         birthYear = this.birthYear,
-        gender = this.gender
+        gender = this.gender,
+        favorite = true
     )
 
 fun List<DBCharacter>.mapFromDBToCharacterList() =
@@ -50,8 +52,12 @@ fun NetworkCharacter.mapToCharacter() =
 //        films = this.relatedFilms?.mapToFilmList() ?: listOf()
     )
 
-fun List<NetworkCharacter>.mapFromNetworkToCharacterList() =
-    this.map { it.mapToCharacter() }
+fun List<NetworkCharacter>.mapFromNetworkToCharacterList(dao: CharacterDao) =
+    this.map {
+        val result = it.mapToCharacter()
+        result.favorite = dao.isCharacterExist(it.id)
+        result
+    }
 
 fun NetworkFilm.mapToFilm() = Film(
         id = this.id,
