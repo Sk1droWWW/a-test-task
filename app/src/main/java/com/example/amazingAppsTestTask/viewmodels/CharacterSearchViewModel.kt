@@ -14,12 +14,13 @@ class CharacterSearchViewModel(
     private val repository: StarWarsRepository
 ) : ViewModel() {
 
+    //    private val _listData = MutableStateFlow<PagingData<DBCharacter>?>(null)
+    var listData: Flow<PagingData<Character>>? = null
+
+
     fun searchCharacters(query: String) {
         listData = repository.searchCharacters(query).cachedIn(viewModelScope)
     }
-
-//    private val _listData = MutableStateFlow<PagingData<DBCharacter>?>(null)
-    var listData: Flow<PagingData<Character>>? = null
 
     init {
         searchCharacters("")

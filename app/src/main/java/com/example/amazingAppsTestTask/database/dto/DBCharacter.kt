@@ -9,14 +9,21 @@ data class DBCharacter(
     @PrimaryKey
     @ColumnInfo(name = "id")
     var id: String = "",
-
+    @ColumnInfo(name = "name")
     var name: String,
+    @ColumnInfo(name = "height")
     var height: String,
+    @ColumnInfo(name = "mass")
     var mass: String,
+    @ColumnInfo(name = "hairColor")
     var hairColor: String = "",
+    @ColumnInfo(name = "skinColor")
     var skinColor: String = "",
+    @ColumnInfo(name = "eyeColor")
     var eyeColor: String = "",
+    @ColumnInfo(name = "birthYear")
     var birthYear: String = "",
+    @ColumnInfo(name = "gender")
     var gender: String,
 //    var films: Int,
 )
