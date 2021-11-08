@@ -46,7 +46,7 @@ class SearchCharactersPagingDataAdapter(
             binding.massTv.text = character.mass
             binding.favoriteBtn.setOnClickListener {
                 onFavoriteClicked(character)
-                binding.favoriteBtn.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                binding.favoriteBtn.setImageResource(R.drawable.ic_baseline_favorite_24)
             }
         }
     }

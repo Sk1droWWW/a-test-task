@@ -46,7 +46,7 @@ class FavoriteCharactersListAdapter(
             binding.heightTv.text = character.height
             binding.massTv.text = character.mass
 
-            binding.favoriteBtn.setBackgroundResource(R.drawable.ic_baseline_delete_24)
+            binding.favoriteBtn.setImageResource(R.drawable.ic_baseline_delete_24)
             binding.favoriteBtn.setOnClickListener {
                 onDeleteClicked(character)
 //                binding.favoriteBtn.background = R.drawable.ic_baseline_favorite_24

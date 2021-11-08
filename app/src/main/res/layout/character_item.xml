@@ -122,8 +122,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/favorite_btn"
 
-            android:layout_margin="@dimen/big_margin"
+            android:layout_marginVertical="@dimen/big_margin"
             android:src="@drawable/ic_baseline_favorite_border_24"
+            android:padding="@dimen/default_margin"
 
             app:layout_constraintTop_toTopOf="@id/character_img_holder"
             app:layout_constraintBottom_toBottomOf="@id/character_img_holder"
