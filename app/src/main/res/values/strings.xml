@@ -14,4 +14,5 @@
     <string name="director_label">Director:</string>
     <string name="release_date_label">Release</string>
     <string name="search_character_hint">Search Character</string>
+    <string name="load_state_retry_btn">Retry</string>
 </resources>

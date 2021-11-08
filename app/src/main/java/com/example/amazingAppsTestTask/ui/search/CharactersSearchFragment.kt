@@ -67,7 +67,10 @@ class CharactersSearchFragment : Fragment() {
             { viewModel.saveCharacter(it)}
         )
 
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(
+            footer = SearchCharactersStateAdapter { adapter.retry() }
+        )
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
         setupSearchView(adapter)
