@@ -2,6 +2,7 @@ package com.example.amazingAppsTestTask.viewmodels
 
 import androidx.lifecycle.*
 import com.example.amazingAppsTestTask.domain.model.Character
+import com.example.amazingAppsTestTask.domain.model.Film
 import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
 import kotlinx.coroutines.launch
 
@@ -13,9 +14,19 @@ class CharacterDetailsViewModel(
     val btnState: LiveData<Boolean>
         get() = _btnState
 
+    private val _filmList = MutableLiveData<List<Film>>()
+    val filmList: LiveData<List<Film>>
+        get() = _filmList
+
+    fun retrieveFilmList(character: Character) {
+        viewModelScope.launch {
+            _filmList.value = repository.retrieveFilms(character)
+        }
+    }
+
     fun saveCharacter(character: Character) {
         viewModelScope.launch {
-            repository.saveCharacter(character)
+            _filmList.value?.let { repository.saveCharacterAndFilms(character, it) }
         }
 
         setButtonsState(true)

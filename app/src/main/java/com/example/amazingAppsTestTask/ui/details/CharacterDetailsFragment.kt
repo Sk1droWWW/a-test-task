@@ -13,7 +13,6 @@ import com.example.amazingAppsTestTask.CharacterApplication
 import com.example.amazingAppsTestTask.R
 import com.example.amazingAppsTestTask.databinding.FragmentCharacterDetailsBinding
 import com.example.amazingAppsTestTask.domain.model.Character
-import com.example.amazingAppsTestTask.domain.model.Film
 import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
 import com.example.amazingAppsTestTask.network.StarWarsApiService
 import com.example.amazingAppsTestTask.viewmodels.CharacterDetailsViewModel
@@ -83,8 +82,10 @@ class CharacterDetailsFragment : Fragment() {
                 viewModel.saveCharacter(item)
             }
 
-            setRecycler(item.films)
+            viewModel.retrieveFilmList(item)
         }
+
+        setRecycler()
     }
 
     private fun observeButtonsState() {
@@ -105,7 +106,7 @@ class CharacterDetailsFragment : Fragment() {
         setBottomNavVisibility(View.VISIBLE)
     }
 
-    private fun setRecycler(items: List<Film?>) {
+    private fun setRecycler() {
         val adapter = FilmListAdapter()
 
         binding.recyclerView.layoutManager = LinearLayoutManager(
@@ -115,13 +116,13 @@ class CharacterDetailsFragment : Fragment() {
         )
         binding.recyclerView.adapter = adapter
 
-        adapter.submitList(items)
+        observeItems(adapter)
     }
 
     private fun observeItems(adapter: FilmListAdapter) {
-//        viewModel.films.observe(viewLifecycleOwner) { items ->
-//            adapter.submitList(items)
-//        }
+        viewModel.filmList.observe(viewLifecycleOwner) { items ->
+            adapter.submitList(items)
+        }
     }
 
 }

@@ -12,5 +12,5 @@ data class NetworkCharacter  (
     @Json(name = "hair_color")  val hairColor: String,
     @Json(name = "skin_color")  val skinColor: String,
     @Json(name = "eye_color")   val eyeColor: String,
-    @Json(name = "films")       val relatedFilms: List<String>?
+    @Json(name = "films")       val relatedFilms: List<String> = emptyList()
 ) : NetworkModel()

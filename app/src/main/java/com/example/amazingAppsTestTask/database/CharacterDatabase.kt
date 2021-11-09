@@ -18,7 +18,7 @@ import com.example.amazingAppsTestTask.database.dto.DBFilm
         DBFilm::class,
         CharacterFilmCrossRef::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class CharacterDatabase

@@ -6,7 +6,6 @@ import com.example.amazingAppsTestTask.database.dto.DBCharacter
 import com.example.amazingAppsTestTask.database.dto.DBFilm
 import com.example.amazingAppsTestTask.domain.model.Character
 import com.example.amazingAppsTestTask.domain.model.Film
-import com.example.amazingAppsTestTask.network.StarWarsApiService
 import com.example.amazingAppsTestTask.network.dto.NetworkCharacter
 import com.example.amazingAppsTestTask.network.dto.NetworkFilm
 
@@ -23,10 +22,10 @@ fun CharacterWithFilms.mapToCharacter() =
         birthYear = this.character.birthYear,
         gender = this.character.gender,
         favorite = true,
-        films = this.films.mapToFilmList()
+        films = this.films.map { it.id }
     )
 
-fun NetworkCharacter.mapToCharacter(films: List<Film?>) =
+fun NetworkCharacter.mapToCharacter() =
     Character(
         id = this.id,
         name = this.name,
@@ -37,7 +36,7 @@ fun NetworkCharacter.mapToCharacter(films: List<Film?>) =
         eyeColor = this.eyeColor,
         birthYear = this.birthYear,
         gender = this.gender,
-        films = films
+        films = this.relatedFilms
     )
 
 fun Character.mapToDBCharacter() =
@@ -61,7 +60,7 @@ fun DBFilm.mapToFilm() =
         director = this.director,
         producer = this.date,
         date = this.date
-        )
+    )
 
 fun NetworkFilm.mapToFilm() =
     Film(
@@ -86,16 +85,9 @@ fun Film.mapToDbFilm() =
 fun List<CharacterWithFilms>.mapFromDBToCharacterList() =
     this.map { it.mapToCharacter() }
 
-suspend fun List<NetworkCharacter>.mapFromNetworkToCharacterList(
-    api: StarWarsApiService,
-    dao: CharacterDao) =
+fun List<NetworkCharacter>.mapFromNetworkToCharacterList(dao: CharacterDao) =
     this.map { character ->
-        val networkFilms = character.relatedFilms?.map {
-            api.getFilm(getId(it)).body()?.mapToFilm()
-        } ?: emptyList()
-
-        val result = character.mapToCharacter(networkFilms)
-
+        val result = character.mapToCharacter()
         result.favorite = dao.isCharacterExist(character.id)
         result
     }
@@ -103,10 +95,3 @@ suspend fun List<NetworkCharacter>.mapFromNetworkToCharacterList(
 fun List<DBFilm?>.mapToFilmList() = this.map { it?.mapToFilm() }
 
 fun List<Film?>.mapToDBFilm() = this.map { it?.mapToDbFilm() }
-
-private fun getId(url: String): String {
-    val string = url.split("/".toRegex()).dropLastWhile {
-        it.isEmpty()
-    }.toTypedArray()
-    return string[string.size - 1]
-}

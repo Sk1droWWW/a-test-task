@@ -25,7 +25,7 @@ class CharacterRemoteDataSource(
             val response = apiService.searchCharacter(currentLoadingPageKey, query)
             val responseData = mutableListOf<Character>()
             val dataResult = CoroutineScope(Dispatchers.IO).async(start = CoroutineStart.LAZY) {
-                response.body()?.results?.mapFromNetworkToCharacterList(apiService, dao)
+                response.body()?.results?.mapFromNetworkToCharacterList(dao)
                     ?: emptyList()
             }
             val data = dataResult.await()

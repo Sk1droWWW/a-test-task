@@ -13,6 +13,6 @@ data class Character(
     val birthYear: String = "",
     val gender: String,
     var favorite: Boolean = false,
-    val films: List<Film?>,
+    val films: List<String> = emptyList(),
 ) : Serializable
 

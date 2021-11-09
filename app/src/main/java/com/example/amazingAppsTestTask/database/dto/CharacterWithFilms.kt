@@ -12,10 +12,12 @@ data class CharacterWithFilms(
     val films: List<DBFilm>
 )
 
-@Entity(primaryKeys = ["character_id", "film_id"])
+@Entity(
+    tableName = "character_film_ref",
+    primaryKeys = ["character_id", "film_id"])
 data class CharacterFilmCrossRef(
-    @ColumnInfo(name = "character_id")
-    val characterId: String,
-    @ColumnInfo(name = "film_id")
-    val filmId: String
-)
+        @ColumnInfo(name = "character_id")
+        val characterId: String,
+        @ColumnInfo(name = "film_id")
+        val filmId: String
+    )

@@ -27,8 +27,14 @@ interface CharacterDao {
     @Delete
     suspend fun delete(ref: CharacterFilmCrossRef)
 
+    @Query("SELECT * FROM character_film_ref WHERE character_id = :id")
+    fun getCharacterFilmRef(id: String): Flow<List<CharacterFilmCrossRef>>
+
     @Query("SELECT * FROM character_table WHERE character_id = :id")
-    fun get(id: String): Flow<DBCharacter>
+    fun getCharacter(id: String): Flow<DBCharacter>
+
+    @Query("SELECT * FROM film_table WHERE film_id = :id")
+    fun getFilm(id: String): Flow<DBFilm>
 
     @Transaction
     @Query("SELECT * FROM character_table")

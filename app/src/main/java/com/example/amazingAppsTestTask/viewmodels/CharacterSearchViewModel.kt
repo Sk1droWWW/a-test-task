@@ -28,7 +28,7 @@ class CharacterSearchViewModel(
 
     private fun saveCharacter(character: Character) {
         viewModelScope.launch {
-            repository.saveCharacter(character)
+            repository.saveCharacterFromSearchFragment(character)
         }
     }
 
