@@ -1,4 +1,4 @@
-# AmazingApps Test Task
+# Test Task
 
 A Simple Android Mobile Application which has been implemented using MVVM design.
 
