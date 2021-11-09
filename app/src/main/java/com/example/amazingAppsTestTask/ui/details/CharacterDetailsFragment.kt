@@ -31,7 +31,8 @@ class CharacterDetailsFragment : Fragment() {
             StarWarsRepository(
                 StarWarsApiService.getApiService(),
                 (activity?.application as CharacterApplication).database
-                    .itemDao()),
+                    .itemDao()
+            ),
         )
     }
 
@@ -79,7 +80,8 @@ class CharacterDetailsFragment : Fragment() {
             }
             addBtn.setOnClickListener {
                 item.favorite = true
-                viewModel.saveCharacter(item) }
+                viewModel.saveCharacter(item)
+            }
 
             setRecycler(item.films)
         }
@@ -110,7 +112,6 @@ class CharacterDetailsFragment : Fragment() {
         binding.recyclerView.adapter = adapter
 
         adapter.submitList(items)
-//        observeItems(adapter)
     }
 
     private fun observeItems(adapter: FilmListAdapter) {

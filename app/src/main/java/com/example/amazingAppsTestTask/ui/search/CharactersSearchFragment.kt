@@ -29,7 +29,8 @@ class CharactersSearchFragment : Fragment() {
             StarWarsRepository(
                 StarWarsApiService.getApiService(),
                 (activity?.application as CharacterApplication).database
-                    .itemDao()),
+                    .itemDao()
+            ),
         )
     }
     private var searchJob: Job? = null
@@ -59,13 +60,15 @@ class CharactersSearchFragment : Fragment() {
     private fun setupRecycler() {
 
         val adapter = SearchCharactersPagingDataAdapter(
-            { val action =
-                CharactersSearchFragmentDirections
-                    .actionCharactersSearchFragmentToCharacterDetailsFragment(
-                        character = it
-                    )
-                this.findNavController().navigate(action) },
-            { viewModel.characterItemClick(it)}
+            {
+                val action =
+                    CharactersSearchFragmentDirections
+                        .actionCharactersSearchFragmentToCharacterDetailsFragment(
+                            character = it
+                        )
+                this.findNavController().navigate(action)
+            },
+            { viewModel.characterItemClick(it) }
         )
 
         binding.recyclerView.setHasFixedSize(true)

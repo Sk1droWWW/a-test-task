@@ -29,14 +29,11 @@ interface CharacterDao {
 
     @Query("SELECT * FROM character_table WHERE character_id = :id")
     fun get(id: String): Flow<DBCharacter>
-//
-//    @Query("SELECT * FROM character_table")
-//    fun getFavorites(): Flow<List<DBCharacter>>
 
     @Transaction
     @Query("SELECT * FROM character_table")
     fun getFavorites(): Flow<List<CharacterWithFilms>>
 
     @Query("SELECT EXISTS(SELECT * FROM character_table WHERE character_id = :id)")
-    fun isCharacterExist(id : String) : Boolean
+    fun isCharacterExist(id: String): Boolean
 }

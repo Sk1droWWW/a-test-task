@@ -23,27 +23,27 @@ import com.example.amazingAppsTestTask.database.dto.DBFilm
 )
 abstract class CharacterDatabase
     : RoomDatabase() {
-        abstract fun itemDao(): CharacterDao
+    abstract fun itemDao(): CharacterDao
 
-        companion object {
-            @Volatile
-            private var INSTANCE: CharacterDatabase? = null
+    companion object {
+        @Volatile
+        private var INSTANCE: CharacterDatabase? = null
 
-            fun getDatabase(context: Context): CharacterDatabase {
-                // if the INSTANCE is not null, then return it,
-                // if it is, then create the database
-                return INSTANCE ?: synchronized(this) {
-                    val instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        CharacterDatabase::class.java,
-                        "habit_database"
-                    )
-                        .fallbackToDestructiveMigration()
-                        .build()
-                    INSTANCE = instance
-                    // return instance
-                    instance
-                }
+        fun getDatabase(context: Context): CharacterDatabase {
+            // if the INSTANCE is not null, then return it,
+            // if it is, then create the database
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    CharacterDatabase::class.java,
+                    "habit_database"
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+                INSTANCE = instance
+                // return instance
+                instance
             }
         }
+    }
 }

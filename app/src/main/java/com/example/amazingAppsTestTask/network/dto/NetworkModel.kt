@@ -17,8 +17,6 @@ open class NetworkModel {
      *
      * @return id String
      */
-    // example: https://swapi.co/api/films/2/
-//    @Json(name = "id")
     val id: String
         get() {
             val string = url.split("/".toRegex()).dropLastWhile {
@@ -26,7 +24,4 @@ open class NetworkModel {
             }.toTypedArray()
             return string[string.size - 1]
         }
-
-//    open val relatedFilms: List<Net>?
-//        get() = null
 }

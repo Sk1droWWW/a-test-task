@@ -21,9 +21,6 @@ interface StarWarsApiService {
         @Query("page") page: Int,
         @Query("search") name: String?): Response<NetworkModelList<NetworkCharacter>>
 
-    @GET("people" + "/{id}")
-    fun getCharacter(@Path("id") id: Int): Response<NetworkCharacter>
-
     @GET("films" + "/{id}")
     suspend fun getFilm(@Path("id") id: String): Response<NetworkFilm>
 

@@ -24,7 +24,8 @@ class FavoriteCharactersFragment : Fragment() {
             StarWarsRepository(
                 StarWarsApiService.getApiService(),
                 (activity?.application as CharacterApplication).database
-                    .itemDao()),
+                    .itemDao()
+            ),
         )
     }
 
@@ -54,7 +55,7 @@ class FavoriteCharactersFragment : Fragment() {
                         .actionFavoriteCharactersFragmentToCharacterDetailsFragment(
                             character = it
                         )
-               this.findNavController().navigate(action)
+                this.findNavController().navigate(action)
             },
             { viewModel.deleteCharacter(it) }
         )

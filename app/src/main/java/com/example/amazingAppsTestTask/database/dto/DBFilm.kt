@@ -9,8 +9,6 @@ data class DBFilm(
     @PrimaryKey
     @ColumnInfo(name = "film_id")
     val id: String,
-//    @ColumnInfo(name = "parent_character_id")
-//    val characterId: String,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "opening_crawl")

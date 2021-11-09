@@ -104,8 +104,6 @@ fun List<DBFilm?>.mapToFilmList() = this.map { it?.mapToFilm() }
 
 fun List<Film?>.mapToDBFilm() = this.map { it?.mapToDbFilm() }
 
-//fun List<NetworkFilm>.mapToFilmList() = this.map { it.mapToFilm() }
-
 private fun getId(url: String): String {
     val string = url.split("/".toRegex()).dropLastWhile {
         it.isEmpty()

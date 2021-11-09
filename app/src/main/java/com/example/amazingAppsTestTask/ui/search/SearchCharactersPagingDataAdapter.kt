@@ -11,7 +11,8 @@ import com.example.amazingAppsTestTask.domain.model.Character
 
 class SearchCharactersPagingDataAdapter(
     private val onItemClicked: (Character) -> Unit,
-    private val onFavoriteClicked: (Character) -> Unit) :
+    private val onFavoriteClicked: (Character) -> Unit
+) :
     PagingDataAdapter<Character, SearchCharactersPagingDataAdapter.ItemViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,

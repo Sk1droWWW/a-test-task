@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.amazingAppsTestTask.databinding.FilmItemBinding
 import com.example.amazingAppsTestTask.domain.model.Film
 
-class FilmListAdapter() :
+class FilmListAdapter :
     ListAdapter<Film, FilmListAdapter.ItemViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,

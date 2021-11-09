@@ -43,10 +43,6 @@ class StarWarsRepository(
         }
     }
 
-/*    fun retrieveCharacter(character: Character) : Flow<Character> {
-        return dao.get(character.id).map { it.mapToCharacter() }
-    }*/
-
     suspend fun saveCharacter(character: Character) {
         character.films.forEach {
             if (it != null) {

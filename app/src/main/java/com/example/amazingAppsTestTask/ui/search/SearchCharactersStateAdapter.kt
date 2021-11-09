@@ -33,30 +33,32 @@ class SearchCharactersStateAdapter(
 
     inner class LoadStateViewHolder(private var binding: LoadStateViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(loadState: LoadState) {
-                binding.loadStateProgress.visibility =
-                    toVisibility(loadState is LoadState.Loading
-                            && !loadState.endOfPaginationReached)
-                binding.loadStateErrorMessageTv.visibility =
-                    toVisibility(loadState !is LoadState.Loading)
-                binding.loadStateRetryBtn.visibility =
-                    toVisibility(loadState !is LoadState.Loading)
+        fun bind(loadState: LoadState) {
+            binding.loadStateProgress.visibility =
+                toVisibility(
+                    loadState is LoadState.Loading
+                            && !loadState.endOfPaginationReached
+                )
+            binding.loadStateErrorMessageTv.visibility =
+                toVisibility(loadState !is LoadState.Loading)
+            binding.loadStateRetryBtn.visibility =
+                toVisibility(loadState !is LoadState.Loading)
 
-                if (loadState is LoadState.Error){
-                    binding.loadStateErrorMessageTv.text =
-                        loadState.error.localizedMessage
-                }
-
-                binding.loadStateRetryBtn.setOnClickListener {
-                    retry.invoke()
-                }
+            if (loadState is LoadState.Error) {
+                binding.loadStateErrorMessageTv.text =
+                    loadState.error.localizedMessage
             }
 
-            private fun toVisibility(constraint: Boolean): Int =
-                if (constraint) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
+            binding.loadStateRetryBtn.setOnClickListener {
+                retry.invoke()
+            }
         }
+
+        private fun toVisibility(constraint: Boolean): Int =
+            if (constraint) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+    }
 }
