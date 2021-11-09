@@ -12,7 +12,10 @@
     <string name="character_skin_color_label">Skin Color:</string>
     <string name="character_films_label">Films</string>
     <string name="director_label">Director:</string>
-    <string name="release_date_label">Release</string>
+    <string name="release_date_label">Release:</string>
     <string name="search_character_hint">Search Character</string>
     <string name="load_state_retry_btn">Retry</string>
+    <string name="favorite_fragment_label">Favorites</string>
+    <string name="details_fragment_label">Character Info</string>
+    <string name="search_fragment_label">Search Characters</string>
 </resources>
