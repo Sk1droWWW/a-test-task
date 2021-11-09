@@ -48,7 +48,7 @@
 
             android:layout_marginHorizontal="@dimen/default_margin"
             android:maxLines="1"
-            android:textSize="24sp"
+            android:textAppearance="?attr/textAppearanceHeadline5"
             android:textStyle="bold"
 
             app:layout_constraintBottom_toTopOf="@+id/height_label"
@@ -64,7 +64,8 @@
             android:id="@+id/height_label"
 
             android:text="@string/character_height_label"
-            android:textSize="12sp"
+            android:textAppearance="?attr/textAppearanceBody2"
+
 
             app:layout_constraintBottom_toBottomOf="@+id/character_img_holder"
             app:layout_constraintStart_toStartOf="@+id/character_name_tv"
@@ -78,7 +79,7 @@
             android:layout_marginStart="@dimen/extra_small_margin"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="12sp"
+            android:textAppearance="?attr/textAppearanceCaption"
 
             app:layout_constraintStart_toEndOf="@id/height_label"
             app:layout_constraintBottom_toBottomOf="@id/height_label"
@@ -94,7 +95,7 @@
 
             android:layout_marginStart="@dimen/default_margin"
             android:text="@string/character_mass_label"
-            android:textSize="12sp"
+            android:textAppearance="?attr/textAppearanceBody2"
 
             app:layout_constraintBottom_toBottomOf="@+id/height_tv"
             app:layout_constraintStart_toEndOf="@id/height_tv"
@@ -108,7 +109,7 @@
             android:layout_marginStart="@dimen/extra_small_margin"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="12sp"
+            android:textAppearance="?attr/textAppearanceCaption"
 
             app:layout_constraintStart_toEndOf="@id/mass_label"
             app:layout_constraintBottom_toBottomOf="@id/mass_label"

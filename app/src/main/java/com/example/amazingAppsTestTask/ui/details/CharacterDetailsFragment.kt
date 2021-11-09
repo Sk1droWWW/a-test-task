@@ -108,7 +108,11 @@ class CharacterDetailsFragment : Fragment() {
     private fun setRecycler(items: List<Film?>) {
         val adapter = FilmListAdapter()
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerView.layoutManager = LinearLayoutManager(
+            this.context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
         binding.recyclerView.adapter = adapter
 
         adapter.submitList(items)

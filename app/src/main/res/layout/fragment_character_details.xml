@@ -1,245 +1,403 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.details.CharacterDetailsFragment"
-
-    android:background="?attr/colorPrimary">
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="@dimen/character_detail_photo_size"
-        android:layout_height="@dimen/character_detail_photo_size"
-        android:id="@+id/character_img_holder"
-
-        android:layout_margin="@dimen/big_margin"
-        app:cardCornerRadius="@dimen/cardview_radius"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/character_img"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_baseline_person_24"
-
-            app:tint="?colorPrimary"
-            tools:ignore="ContentDescription" />
-
-    </com.google.android.material.card.MaterialCardView>
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        android:background="@drawable/character_details_background_card"
+        <com.google.android.material.card.MaterialCardView
 
-        android:layout_marginTop="@dimen/big_margin"
+            android:id="@+id/character_img_holder"
+            android:layout_width="@dimen/character_detail_photo_size"
+            android:layout_height="@dimen/character_detail_photo_size"
 
-        app:layout_constraintTop_toBottomOf="@id/character_img_holder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+            android:layout_margin="@dimen/big_margin"
+            app:cardCornerRadius="@dimen/cardview_radius"
+            app:cardElevation="@dimen/default_elevation"
+
+
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/character_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_person_24"
+
+                app:tint="?colorPrimary"
+                tools:ignore="ContentDescription" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:id="@+id/name_top_divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/divider_height"
+
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:background="?attr/colorPrimary"
+
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/character_img_holder" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/character_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginBottom="@dimen/big_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:layout_margin="@dimen/default_margin"
+            android:textAppearance="?attr/textAppearanceHeadline4"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintTop_toBottomOf="@id/name_top_divider"
+            app:layout_constraintBottom_toTopOf="@id/name_bottom_divider"
+            tools:text="@tools:sample/full_names" />
 
-            tools:text="@tools:sample/full_names"/>
+        <View
+            android:id="@+id/name_bottom_divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/divider_height"
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_height_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
             android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:text="@string/character_height_label"
-            android:textStyle="bold"
+            android:background="?attr/colorPrimary"
 
-            app:layout_constraintStart_toStartOf="@+id/character_name_tv"
+            app:layout_constraintEnd_toEndOf="@+id/name_top_divider"
+            app:layout_constraintStart_toStartOf="@+id/name_top_divider"
             app:layout_constraintTop_toBottomOf="@id/character_name_tv" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_height_tv"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/character_height"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="@dimen/extra_small_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            app:layout_constraintEnd_toEndOf="@+id/add_btn"
+            app:layout_constraintStart_toStartOf="@+id/name_bottom_divider"
+            app:layout_constraintTop_toBottomOf="@id/name_bottom_divider">
 
-            app:layout_constraintStart_toEndOf="@id/character_height_label"
-            app:layout_constraintTop_toTopOf="@id/character_height_label"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            tools:text="145"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_height_label"
+                    android:layout_width="wrap_content"
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_mass_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:text="@string/character_height_label"
 
-            android:text="@string/character_mass_label"
-            android:textStyle="bold"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_height_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="@dimen/extra_small_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toEndOf="@+id/character_height_label"
+                    app:layout_constraintTop_toTopOf="@+id/character_height_label"
+                    tools:text="145" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/character_mass"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/character_height"
+            app:layout_constraintEnd_toEndOf="@+id/remove_btn"
             app:layout_constraintStart_toStartOf="@+id/remove_btn"
-            app:layout_constraintTop_toTopOf="@+id/character_height_label" />
+            app:layout_constraintTop_toTopOf="@+id/character_height">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_mass_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            android:layout_marginStart="@dimen/extra_small_margin"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_mass_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-            app:layout_constraintStart_toEndOf="@id/character_mass_label"
-            app:layout_constraintTop_toTopOf="@id/character_mass_label"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:text="@string/character_mass_label"
 
-            tools:text="55"/>
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_gender_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_mass_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-            android:text="@string/character_gender_label"
-            android:textStyle="bold"
+                    android:layout_marginStart="@dimen/extra_small_margin"
 
-            app:layout_constraintStart_toStartOf="@+id/character_mass_label"
-            app:layout_constraintTop_toTopOf="@+id/character_birth_year_label" />
+                    app:layout_constraintStart_toEndOf="@id/character_mass_label"
+                    app:layout_constraintTop_toTopOf="@id/character_mass_label"
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_gender_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                    tools:text="55" />
 
-            android:layout_marginStart="@dimen/extra_small_margin"
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            app:layout_constraintStart_toEndOf="@id/character_gender_label"
-            app:layout_constraintTop_toTopOf="@id/character_gender_label"
+        </com.google.android.material.card.MaterialCardView>
 
-            tools:text="Male"/>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/character_birth_year"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
 
+            android:layout_marginTop="@dimen/default_margin"
 
+            app:layout_constraintEnd_toEndOf="@+id/character_height"
+            app:layout_constraintStart_toStartOf="@+id/character_height"
+            app:layout_constraintTop_toBottomOf="@+id/character_height">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_birth_year_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_birth_year_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/character_birth_year_label"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_birth_year_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="@dimen/extra_small_margin"
+
+                    app:layout_constraintStart_toEndOf="@id/character_birth_year_label"
+                    app:layout_constraintTop_toTopOf="@id/character_birth_year_label"
+
+                    tools:text="22BY3R" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/character_gender"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/character_birth_year"
+            app:layout_constraintEnd_toEndOf="@+id/character_mass"
+            app:layout_constraintStart_toStartOf="@+id/character_mass"
+            app:layout_constraintTop_toTopOf="@+id/character_birth_year">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_gender_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/character_gender_label"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_gender_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="@dimen/extra_small_margin"
+
+                    app:layout_constraintStart_toEndOf="@id/character_gender_label"
+                    app:layout_constraintTop_toTopOf="@id/character_gender_label"
+
+                    tools:text="Male" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/character_hair_color"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+
+            android:layout_marginTop="@dimen/default_margin"
+
+            app:layout_constraintEnd_toEndOf="@+id/character_height"
+            app:layout_constraintStart_toStartOf="@+id/character_height"
+            app:layout_constraintTop_toBottomOf="@+id/character_birth_year">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_hair_color_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/character_hair_color_label"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"  />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_hair_color_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="@dimen/extra_small_margin"
+
+                    app:layout_constraintStart_toEndOf="@id/character_hair_color_label"
+                    app:layout_constraintTop_toTopOf="@id/character_hair_color_label"
+
+                    tools:text="Blonde" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/character_skin_color"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+
+            android:layout_marginTop="@dimen/default_margin"
+
+            app:layout_constraintBottom_toBottomOf="@+id/character_hair_color"
+            app:layout_constraintEnd_toEndOf="@+id/character_mass"
+            app:layout_constraintStart_toStartOf="@+id/character_mass"
+            app:layout_constraintTop_toBottomOf="@+id/character_gender">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_skin_color_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/character_skin_color_label"
+                    android:layout_marginVertical="@dimen/default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/character_skin_color_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="@dimen/extra_small_margin"
+
+                    app:layout_constraintStart_toEndOf="@id/character_skin_color_label"
+                    app:layout_constraintTop_toTopOf="@id/character_skin_color_label"
+
+                    tools:text="White" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:id="@+id/film_top_divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/divider_height"
 
             android:layout_marginTop="@dimen/big_margin"
-            android:text="@string/character_birth_year_label"
-            android:textStyle="bold"
 
-            app:layout_constraintStart_toStartOf="@+id/character_height_label"
-            app:layout_constraintTop_toBottomOf="@+id/character_height_label" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_birth_year_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/extra_small_margin"
-
-            app:layout_constraintStart_toEndOf="@id/character_birth_year_label"
-            app:layout_constraintTop_toTopOf="@id/character_birth_year_label"
-
-            tools:text="22BY3R"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_hair_color_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="@dimen/big_margin"
-            android:text="@string/character_hair_color_label"
-            android:textStyle="bold"
-
-            app:layout_constraintStart_toStartOf="@+id/character_birth_year_label"
-            app:layout_constraintTop_toBottomOf="@+id/character_birth_year_label" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_hair_color_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/extra_small_margin"
-
-            app:layout_constraintStart_toEndOf="@id/character_hair_color_label"
-            app:layout_constraintTop_toTopOf="@id/character_hair_color_label"
-
-            tools:text="Blonde"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_skin_color_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="@string/character_skin_color_label"
-            android:textStyle="bold"
-
-            app:layout_constraintStart_toStartOf="@+id/character_gender_label"
-            app:layout_constraintTop_toTopOf="@+id/character_hair_color_label" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/character_skin_color_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="@dimen/extra_small_margin"
-
-            app:layout_constraintStart_toEndOf="@id/character_skin_color_label"
-            app:layout_constraintTop_toTopOf="@id/character_skin_color_label"
-
-            tools:text="White"/>
+            android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="@+id/name_bottom_divider"
+            app:layout_constraintStart_toStartOf="@+id/name_bottom_divider"
+            app:layout_constraintTop_toBottomOf="@+id/character_hair_color" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/character_films_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="@dimen/big_margin"
-            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:text="@string/character_films_label"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/recyclerView"
-
+            android:textAppearance="?attr/textAppearanceHeadline4"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="@+id/character_name_tv"
-            app:layout_constraintTop_toBottomOf="@+id/character_hair_color_label" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/film_top_divider" />
+
+        <View
+            android:id="@+id/film_bottom_divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/divider_height"
+
+            android:layout_marginTop="@dimen/default_margin"
+
+            android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="@+id/name_bottom_divider"
+            app:layout_constraintStart_toStartOf="@+id/name_bottom_divider"
+            app:layout_constraintTop_toBottomOf="@+id/character_films_label" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
 
-            android:scrollbars="vertical"
+            android:layout_marginVertical="@dimen/default_margin"
             app:layoutManager="LinearLayoutManager"
-
 
             app:layout_constraintBottom_toTopOf="@+id/add_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/character_films_label"
-            tools:itemCount="5"
+            app:layout_constraintTop_toBottomOf="@+id/film_bottom_divider"
+            tools:itemCount="1"
+
             tools:listitem="@layout/film_item" />
 
         <com.google.android.material.button.MaterialButton
@@ -248,22 +406,20 @@
             android:layout_height="wrap_content"
 
             android:layout_marginBottom="@dimen/default_margin"
-            android:layout_marginTop="@dimen/small_margin"
             android:text="@string/add_btn_label"
             app:icon="@drawable/ic_baseline_favorite_24"
             app:iconGravity="textStart"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/remove_btn"
-            app:layout_constraintStart_toStartOf="@+id/character_name_tv"
-            app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+            app:layout_constraintStart_toStartOf="@+id/name_bottom_divider" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/remove_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginHorizontal="@dimen/default_margin"
 
             android:enabled="false"
             android:text="@string/remove_btn_label"
@@ -272,10 +428,8 @@
 
             app:layout_constraintBottom_toBottomOf="@+id/add_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/add_btn"
-            app:layout_constraintTop_toTopOf="@+id/add_btn" />
+            app:layout_constraintStart_toEndOf="@id/add_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -36,6 +36,7 @@ class FilmListAdapter :
 
         fun bind(film: Film) {
             binding.filmTitleTv.text = film.title
+            binding.filmOpeningCrawlTv.text = film.openingCrawl
             binding.directorTv.text = film.director
             binding.releaseDateTv.text = film.date
         }

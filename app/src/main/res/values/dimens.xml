@@ -5,8 +5,9 @@
     <dimen name="cardview_radius">8dp</dimen>
     <dimen name="default_elevation">8dp</dimen>
     <dimen name="character_photo_size">64dp</dimen>
-    <dimen name="character_detail_photo_size">128dp</dimen>
+    <dimen name="character_detail_photo_size">256dp</dimen>
     <dimen name="extra_small_margin">4dp</dimen>
     <dimen name="cardview_big_radius">16dp</dimen>
     <dimen name="big_margin">24dp</dimen>
+    <dimen name="divider_height">2dp</dimen>
 </resources>
