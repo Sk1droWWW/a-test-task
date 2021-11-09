@@ -12,7 +12,7 @@ data class Character(
     val eyeColor: String = "",
     val birthYear: String = "",
     val gender: String,
-    var favorite: Boolean = false
-//    val films: List<Film>,
+    var favorite: Boolean = false,
+    val films: List<Film?>,
 ) : Serializable
 

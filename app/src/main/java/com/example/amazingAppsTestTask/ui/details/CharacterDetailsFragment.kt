@@ -13,6 +13,7 @@ import com.example.amazingAppsTestTask.CharacterApplication
 import com.example.amazingAppsTestTask.R
 import com.example.amazingAppsTestTask.databinding.FragmentCharacterDetailsBinding
 import com.example.amazingAppsTestTask.domain.model.Character
+import com.example.amazingAppsTestTask.domain.model.Film
 import com.example.amazingAppsTestTask.domain.repository.StarWarsRepository
 import com.example.amazingAppsTestTask.network.StarWarsApiService
 import com.example.amazingAppsTestTask.viewmodels.CharacterDetailsViewModel
@@ -52,7 +53,6 @@ class CharacterDetailsFragment : Fragment() {
         setBottomNavVisibility(View.GONE)
 
         setCharacterInfo()
-        setRecycler()
     }
 
     private fun setCharacterInfo() {
@@ -80,6 +80,8 @@ class CharacterDetailsFragment : Fragment() {
             addBtn.setOnClickListener {
                 item.favorite = true
                 viewModel.saveCharacter(item) }
+
+            setRecycler(item.films)
         }
     }
 
@@ -101,13 +103,14 @@ class CharacterDetailsFragment : Fragment() {
         setBottomNavVisibility(View.VISIBLE)
     }
 
-    private fun setRecycler() {
+    private fun setRecycler(items: List<Film?>) {
         val adapter = FilmListAdapter()
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.adapter = adapter
 
-        observeItems(adapter)
+        adapter.submitList(items)
+//        observeItems(adapter)
     }
 
     private fun observeItems(adapter: FilmListAdapter) {

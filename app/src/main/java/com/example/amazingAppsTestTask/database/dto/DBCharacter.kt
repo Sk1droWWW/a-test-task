@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "character_table")
 data class DBCharacter(
     @PrimaryKey
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "character_id")
     var id: String = "",
     @ColumnInfo(name = "name")
     var name: String,
@@ -25,5 +25,4 @@ data class DBCharacter(
     var birthYear: String = "",
     @ColumnInfo(name = "gender")
     var gender: String,
-//    var films: Int,
 )

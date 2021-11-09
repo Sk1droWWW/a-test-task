@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.amazingAppsTestTask.database.dto.DBFilm
 import com.example.amazingAppsTestTask.databinding.FilmItemBinding
+import com.example.amazingAppsTestTask.domain.model.Film
 
 class FilmListAdapter() :
-    ListAdapter<DBFilm, FilmListAdapter.ItemViewHolder>(DiffCallback) {
+    ListAdapter<Film, FilmListAdapter.ItemViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -34,21 +34,21 @@ class FilmListAdapter() :
     class ItemViewHolder(private var binding: FilmItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(DBFilm: DBFilm) {
-            binding.filmTitleTv.text = DBFilm.title
-            binding.directorTv.text = DBFilm.director
-            binding.releaseDateTv.text = DBFilm.date
+        fun bind(film: Film) {
+            binding.filmTitleTv.text = film.title
+            binding.directorTv.text = film.director
+            binding.releaseDateTv.text = film.date
         }
     }
 
     companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<DBFilm>() {
-            override fun areItemsTheSame(oldDBFilm: DBFilm, newDBFilm: DBFilm): Boolean {
-                return oldDBFilm === newDBFilm
+        private val DiffCallback = object : DiffUtil.ItemCallback<Film>() {
+            override fun areItemsTheSame(oldFilm: Film, newFilm: Film): Boolean {
+                return oldFilm === newFilm
             }
 
-            override fun areContentsTheSame(oldDBFilm: DBFilm, newDBFilm: DBFilm): Boolean {
-                return oldDBFilm.id == newDBFilm.id
+            override fun areContentsTheSame(oldFilm: Film, newFilm: Film): Boolean {
+                return oldFilm.id == newFilm.id
             }
         }
     }

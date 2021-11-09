@@ -3,9 +3,10 @@ package com.example.amazingAppsTestTask.domain.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.example.amazingAppsTestTask.database.CharacterDao
+import com.example.amazingAppsTestTask.database.dto.CharacterFilmCrossRef
 import com.example.amazingAppsTestTask.domain.mapFromDBToCharacterList
-import com.example.amazingAppsTestTask.domain.mapToCharacter
 import com.example.amazingAppsTestTask.domain.mapToDBCharacter
+import com.example.amazingAppsTestTask.domain.mapToDbFilm
 import com.example.amazingAppsTestTask.domain.model.Character
 import com.example.amazingAppsTestTask.network.StarWarsApiService
 import com.example.amazingAppsTestTask.network.datasource.CharacterRemoteDataSource
@@ -31,14 +32,29 @@ class StarWarsRepository(
     ).flow
 
     suspend fun deleteCharacter(character: Character?) {
-        character?.let { dao.delete(it.mapToDBCharacter()) }
+        character?.let { character ->
+            character.films.forEach {
+                if (it != null) {
+                    dao.delete(CharacterFilmCrossRef(character.id, it.id))
+                }
+            }
+
+            dao.delete(character.mapToDBCharacter())
+        }
     }
 
-    fun retrieveCharacter(character: Character) : Flow<Character> {
+/*    fun retrieveCharacter(character: Character) : Flow<Character> {
         return dao.get(character.id).map { it.mapToCharacter() }
-    }
+    }*/
 
     suspend fun saveCharacter(character: Character) {
+        character.films.forEach {
+            if (it != null) {
+                dao.insert(it.mapToDbFilm())
+                dao.insert(CharacterFilmCrossRef(character.id, it.id))
+            }
+        }
+
         dao.insert(character.mapToDBCharacter())
     }
 }

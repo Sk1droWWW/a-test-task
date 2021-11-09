@@ -25,7 +25,7 @@ interface StarWarsApiService {
     fun getCharacter(@Path("id") id: Int): Response<NetworkCharacter>
 
     @GET("films" + "/{id}")
-    fun getFilm(@Path("id") id: Int): Response<NetworkFilm>
+    suspend fun getFilm(@Path("id") id: String): Response<NetworkFilm>
 
     companion object {
         private val moshi = Moshi.Builder()

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.amazingAppsTestTask.database.dto.CharacterFilmCrossRef
 import com.example.amazingAppsTestTask.database.dto.DBCharacter
 import com.example.amazingAppsTestTask.database.dto.DBFilm
 
@@ -14,9 +15,10 @@ import com.example.amazingAppsTestTask.database.dto.DBFilm
 @Database(
     entities = [
         DBCharacter::class,
-        DBFilm::class
+        DBFilm::class,
+        CharacterFilmCrossRef::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class CharacterDatabase
